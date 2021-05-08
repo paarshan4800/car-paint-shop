@@ -13,6 +13,8 @@ from api.queue import Queue
 
 from decouple import config
 
+import os
+
 logging.basicConfig(filename="paint.log", level=logging.DEBUG, format="%(asctime)s : %(levelname)s : %(message)s")
 
 app = Flask(__name__)
@@ -21,20 +23,20 @@ CORS(app)
 
 mysql = MySQL(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = config('SQLALCHEMY_DATABASE_URI')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config('SQLALCHEMY_TRACK_MODIFICATIONS')
-app.config['SECRET_KEY'] = config('SECRET_KEY')
-app.config['BUNDLE_ERRORS'] = config('BUNDLE_ERRORS')
-app.config['MAIL_SERVER'] = config('MAIL_SERVER')
-app.config['MAIL_PORT'] = config('MAIL_PORT')
-app.config['MAIL_USE_TLS'] = config('MAIL_USE_TLS')
-app.config['MAIL_USERNAME'] = config('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = config('MAIL_PASSWORD')
-app.config['MAIL_DEFAULT_SENDER'] = config('MAIL_DEFAULT_SENDER')
-app.config['GOOGLE_CLIENT_ID'] = config('GOOGLE_CLIENT_ID')
-app.config['GOOGLE_CLIENT_SECRET'] = config('GOOGLE_CLIENT_SECRET')
-app.config['GOOGLE_DISCOVERY_URL'] = config('GOOGLE_DISCOVERY_URL')
-app.config['APP_BASE_URL'] = config('APP_BASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['BUNDLE_ERRORS'] = os.getenv('BUNDLE_ERRORS')
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
+app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS')
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
+app.config['GOOGLE_CLIENT_ID'] = os.getenv('GOOGLE_CLIENT_ID')
+app.config['GOOGLE_CLIENT_SECRET'] = os.getenv('GOOGLE_CLIENT_SECRET')
+app.config['GOOGLE_DISCOVERY_URL'] = os.getenv('GOOGLE_DISCOVERY_URL')
+app.config['APP_BASE_URL'] = os.getenv('APP_BASE_URL')
 
 mail = Mail(app)
 
