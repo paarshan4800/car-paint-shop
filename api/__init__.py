@@ -10,9 +10,6 @@ import logging
 import threading
 
 from api.queue import Queue
-
-from decouple import config
-
 import os
 
 logging.basicConfig(filename="paint.log", level=logging.DEBUG, format="%(asctime)s : %(levelname)s : %(message)s")

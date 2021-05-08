@@ -1,5 +1,4 @@
 from api import app
-from decouple import config
 import os
 
 app.config['ENV'] = os.getenv("ENV")
