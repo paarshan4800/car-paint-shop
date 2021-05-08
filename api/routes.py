@@ -97,7 +97,7 @@ def googleLoginRoute():
         return redirect(googleLogin())
     except Exception as e:
         print(e)
-        return {"message": "Server Error"}
+        return {"message": "Server Error"}, 500
 
 
 @app.route("/callback")
@@ -106,7 +106,7 @@ def googleCallbackRoute():
         return googleCallback()
     except Exception as e:
         print(e)
-        return {"message": "Server Error"}
+        return {"message": "Server Error"}, 500
 
 
 @app.route("/home")
