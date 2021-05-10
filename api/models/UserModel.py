@@ -8,6 +8,8 @@ class User(db.Model):
     admin = db.Column(db.Boolean, nullable=False)
     external_id = db.Column(db.String(255), nullable=True)
     type = db.Column(db.String(100), nullable=False)
+    paintJobs = db.relationship('PaintJob', backref='user', lazy=True)
+    verified = db.Column(db.Boolean, nullable=False)
 
     def __repr__(self):
         return "Email - {} Name - {} Admin - {} Type - {}".format(self.email, self.name, self.admin, self.type)

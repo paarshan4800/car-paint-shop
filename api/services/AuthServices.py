@@ -1,21 +1,17 @@
-import json
-from datetime import datetime, timedelta
-
-import requests
-import jwt
-from jwt import InvalidSignatureError
+from flask import render_template
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from api import mail, app, db, client
+from api import mail, app, db, RESETPASSWORDTOKEN, ACCESSTOKEN
 from flask_mail import Message
-from flask import request, redirect
-from api.controllers.UserController import getUser
+
+from api.services.AuthVerificationServices import accountVerificationEmail
+from api.services.TokenServices import generateToken, validateToken
+from api.services.UserServices import getUser
 from api.models.UserModel import User
 
 
 def userLogin(args):
     user = User.query.filter_by(type="NORMAL").filter_by(email=args["email"]).first()
-    print(user)
     if user is not None and check_password_hash(user.password, args["password"]):
         return True
     else:
@@ -41,7 +37,10 @@ def sendResetPasswordMail(user, token):
             user.name,
             token)
 
+        message.html = render_template("resetPasswordRequest.html", name=user.name, token=token)
+
         print(message.body)
+        print(message.html)
         mail.send(message)
 
 
@@ -55,38 +54,15 @@ def sendResetPassword(req):
     if not user or user.type != "NORMAL":
         return {"message": "Invalid Email"}, 400
 
-    token = generateToken(email)
+    token = generateToken(email, RESETPASSWORDTOKEN)
     sendResetPasswordMail(user, token)
     return {"message": "Password reset link sent to mail. Check."}, 200
-
-
-def generateToken(email):
-    token = jwt.encode(
-        {"email": email, "exp": datetime.utcnow() + timedelta(minutes=30)},
-        app.config['SECRET_KEY'],
-        algorithm='HS256'
-    )
-
-    return token
-
-
-def validateToken(token):
-    data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
-    print(data)
-
-    user = getUser(data["email"])
-    print(user)
-
-    if user is None:
-        return False, user
-    else:
-        return True, user
 
 
 def resetPassword(req):
     # Validate token
     token = req["token"]
-    condition, user = validateToken(token)
+    condition, user = validateToken(token, RESETPASSWORDTOKEN)
 
     if not condition:
         return {"message": "Invalid authorization token"}, 401
@@ -98,6 +74,7 @@ def resetPassword(req):
     if not checkPasswordAndCPassword(password, c_password):
         return {"message": "Passwords not matching"}, 400
 
+    # Update password
     hashedPassword = generate_password_hash(password)
     user.password = hashedPassword
     db.session.commit()
@@ -105,18 +82,48 @@ def resetPassword(req):
     return {"message": "Password reset successful"}, 200
 
 
+def createUser(req):
+    email = req["email"]
+    name = req["name"]
+
+    # Check email already used or not
+    if getUser(email) is not None:
+        return {"message": "Email already in use"}, 200
+
+    password = req["password"]
+    c_password = req["c_password"]
+    # Check password and confirmation password
+    if not checkPasswordAndCPassword(password, c_password):
+        return {"message": "Passwords not matching"}, 400
+
+    hashedPwd = generate_password_hash(password, method='sha256')
+    user = User(
+        email=email,
+        password=hashedPwd,
+        name=name,
+        admin=False,
+        type="NORMAL",
+        verified=False
+    )
+
+    # Add to DB
+    db.session.add(user)
+    db.session.commit()
+
+    accountVerificationEmail(user)  # Send Verification Email
+
+    return {
+               "message": "User Created Successfully. Verification mail sent. Please verify your account to access all the features"}, 201
+
+
 def login(req):
     email = req["email"]
     password = req["password"]
-
-    # Validate
-    if not email or not password:
-        return {"message": "Login credentials required"}, 400
 
     # Check whether email and password is correct or not
     if not userLogin(req):
         return {"message": "Invalid Email/Password"}, 400
 
     # Generate access token
-    token = generateToken(email)
+    token = generateToken(email, ACCESSTOKEN)
     return {"message": "Logged in Successfully", "token": token}, 200

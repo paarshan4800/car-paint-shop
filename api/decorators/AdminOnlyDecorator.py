@@ -1,16 +1,16 @@
 from functools import wraps
-from flask import request
+
 import jwt
+from flask import request
 from jwt import InvalidSignatureError, ExpiredSignatureError
 
-from api import app, ACCESSTOKEN
+from api import ACCESSTOKEN
 from api.misc.ServerError import getServerErrorResponse
-from api.services.AuthVerificationServices import isUserVerified
 from api.services.TokenServices import decodeToken
 from api.services.UserServices import getUser
 
 
-def tokenRequired(f):
+def adminOnly(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         try:
@@ -29,14 +29,13 @@ def tokenRequired(f):
 
             # Check if the user exists and correct token type
             if user is None or data["type"] != ACCESSTOKEN:
-                print(data["type"])
                 return {"message": "Invalid authorization token"}, 401
 
-            # Check if user is verified or not
-            if not isUserVerified(user.email):
-                return {"message": "Account not verified. Verification mail sent."}, 401
+            # If the user is not an admin
+            if not user.admin:
+                return {"message": "Admin access required"}, 401
 
-            return f(user, *args, **kwargs)
+            return f(*args, **kwargs)
 
         except (InvalidSignatureError, ExpiredSignatureError) as e:
             return {"message": "Invalid or Expired Authorization Token"}, 400

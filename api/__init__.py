@@ -9,7 +9,7 @@ from oauthlib.oauth2 import WebApplicationClient
 import logging
 import threading
 
-from api.queue import Queue
+from api.misc.queue import Queue
 import os
 
 logging.basicConfig(filename="paint.log", level=logging.DEBUG, format="%(asctime)s : %(levelname)s : %(message)s")
@@ -19,6 +19,10 @@ api = Api(app)
 CORS(app)
 
 mysql = MySQL(app)
+
+ACCESSTOKEN = "ACCESSTOKEN"
+RESETPASSWORDTOKEN = "RESETPASSWORDTOKEN"
+ACCOUNTVERIFICATIONTOKEN = "ACCOUNTVERIFICATIONTOKEN"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS')
@@ -50,4 +54,4 @@ paintJobs = {
     "green": False,
 }
 
-from api import routes
+from api.routes import AuthRoutes, GoogleAuthRoutes, PaintRoutes, QueueRoutes, routes, UserRoutes

@@ -3,9 +3,9 @@ import json
 import requests
 
 from flask import request
-from api import app, db, client
-from api.controllers.AuthController import generateToken
-from api.controllers.UserController import getUser
+from api import app, db, client, ACCESSTOKEN
+from api.services.AuthServices import generateToken
+from api.services.UserServices import getUser
 from api.models.UserModel import User
 
 
@@ -72,5 +72,5 @@ def googleCallback():
         db.session.commit()
 
     # Generate Token
-    token = generateToken(user.email)
+    token = generateToken(user.email, ACCESSTOKEN)
     return {"message": "Logged in Successfully", "token": token}, 200
