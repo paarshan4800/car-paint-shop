@@ -13,7 +13,7 @@ from api.decorators.TokenRequiredDecorator import tokenRequired
 
 
 # Get All Paint Job Records - ADMIN
-@app.route("/getAllPaintJobRecords", methods=["GET"])
+@app.route("/paint/getAllRecords", methods=["GET"])
 @adminOnly
 def getAllPaintJobRecordsRoute():
     try:
@@ -23,7 +23,7 @@ def getAllPaintJobRecordsRoute():
 
 
 # Get Paint Jobs available
-@app.route("/getAvailablePaintJobs", methods=["GET"])
+@app.route("/paint/getAvailable", methods=["GET"])
 def getAvailablePaintJobsRoute():
     try:
         return getAllPaintJobs()
@@ -32,7 +32,7 @@ def getAvailablePaintJobsRoute():
 
 
 # Request Paint Job - USER
-@app.route("/requestPaintJob", methods=["POST"])
+@app.route("/paint/request", methods=["POST"])
 @tokenRequired
 def requestPaintJobRoute(user):
     try:
@@ -54,7 +54,7 @@ def requestPaintJobRoute(user):
 
 
 # Close Specific Painting Area
-@app.route("/closePaintArea", methods=["PATCH"])
+@app.route("/paint/closeArea", methods=["PATCH"])
 @adminOnly
 def closePaintAreaRoute():
     try:

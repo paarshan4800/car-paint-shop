@@ -9,7 +9,7 @@ from flask import request
 
 
 # Register - Create user
-@app.route("/register", methods=["POST"])
+@app.route("/auth/register", methods=["POST"])
 def registerRoute():
     try:
         req = request.get_json(force=True)
@@ -29,7 +29,7 @@ def registerRoute():
 
 
 # Login
-@app.route("/login", methods=["POST"])
+@app.route("/auth/login", methods=["POST"])
 def loginRoute():
     try:
         req = request.get_json()
@@ -49,7 +49,7 @@ def loginRoute():
 
 
 # Reset Password Request
-@app.route("/resetPasswordRequest", methods=["POST"])
+@app.route("/auth/resetPasswordRequest", methods=["POST"])
 def resetPasswordRequestRoute():
     try:
         req = request.get_json()
@@ -69,7 +69,7 @@ def resetPasswordRequestRoute():
 
 
 # Reset Password
-@app.route("/resetPassword", methods=["POST"])
+@app.route("/auth/resetPassword", methods=["POST"])
 def resetPasswordRoute():
     try:
         req = request.get_json()
@@ -105,3 +105,5 @@ def accountVerificationRoute():
 
     except:
         return getServerErrorResponse()
+
+

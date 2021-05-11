@@ -5,7 +5,7 @@ from api.misc.ServerError import getServerErrorResponse
 from api.services.GoogleAuthServices import googleLogin, googleCallback
 
 
-@app.route("/googleLogin", methods=["GET"])
+@app.route("/googleauth/login", methods=["GET"])
 def googleLoginRoute():
     try:
         return redirect(googleLogin())
@@ -14,7 +14,7 @@ def googleLoginRoute():
         return getServerErrorResponse()
 
 
-@app.route("/callback")
+@app.route("/googleauth/callback")
 def googleCallbackRoute():
     try:
         return googleCallback()

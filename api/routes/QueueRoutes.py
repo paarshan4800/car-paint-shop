@@ -7,7 +7,7 @@ from api.validators.QueueValidator import validateUpdateQueueLengthRoute
 
 
 # Get queue length
-@app.route("/getQueueLength", methods=["GET"])
+@app.route("/queue/getLength", methods=["GET"])
 def getQueueLengthRoute():
     try:
         return getQueueDetails()
@@ -16,7 +16,7 @@ def getQueueLengthRoute():
 
 
 # Update Queue Length
-@app.route("/updateQueueLength", methods=["PUT"])
+@app.route("/queue/updateLength", methods=["PUT"])
 def updateQueueLengthRoute():
     try:
         req = request.get_json(force=True)
