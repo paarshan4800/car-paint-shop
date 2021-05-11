@@ -14,7 +14,8 @@ def googleLoginRoute():
         return redirect(googleLogin())
     except Exception as e:
         logging.error("Error in google auth - {}".format(e))
-        return getServerErrorResponse()
+        return {"message": "error - {}".format(e)}
+        # return getServerErrorResponse()
 
 
 # Google Login Callback Route
@@ -24,4 +25,5 @@ def googleCallbackRoute():
         return googleCallback()
     except Exception as e:
         logging.error("Error in google auth callback - {}".format(e))
-        return getServerErrorResponse()
+        return {"message": "error - {}".format(e)}
+        # return getServerErrorResponse()
