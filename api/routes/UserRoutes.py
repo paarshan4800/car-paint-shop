@@ -1,7 +1,7 @@
 from api import app
 from flask import request
 from api.decorators.AdminOnlyDecorator import adminOnly
-from api.misc.ServerError import getServerErrorResponse
+from api.misc.ErrorResponse import getServerErrorResponse
 from api.services.UserServices import getAllUsers, deleteUser
 
 from api.validators.UserValidator import validateDeleteUserRoute
@@ -21,7 +21,7 @@ def getUsers(user):
 # Delete user
 @app.route("/user", methods=["DELETE"])
 @adminOnly
-def deleteUserRoute():
+def deleteUserRoute(user):
     try:
         req = request.get_json(force=True)
 

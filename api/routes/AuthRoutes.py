@@ -1,10 +1,10 @@
 from jwt import InvalidSignatureError, ExpiredSignatureError
 from api import app
-from api.misc.ServerError import getServerErrorResponse
-from api.services.AuthServices import login, sendResetPassword, resetPassword, createUser
+from api.misc.ErrorResponse import getServerErrorResponse, getInvalidTokenErrorResponse
+from api.services.AuthServices import login, sendResetPassword, resetPassword, createUser, twoFactorAuth
 from api.services.AuthVerificationServices import verifyAccount
 from api.validators.AuthValidators import validateRegisterRoute, validateLoginRoute, validateResetPasswordRequestRoute, \
-    validateResetPasswordRoute
+    validateResetPasswordRoute, validateTwoFactorAuthRoute
 from flask import request
 
 
@@ -23,8 +23,7 @@ def registerRoute():
 
         return createUser(req)
 
-    except Exception as e:
-        print(e)
+    except:
         return getServerErrorResponse()
 
 
@@ -43,8 +42,7 @@ def loginRoute():
 
         return login(req)
 
-    except Exception as e:
-        print(e)
+    except:
         return getServerErrorResponse()
 
 
@@ -63,8 +61,7 @@ def resetPasswordRequestRoute():
 
         return sendResetPassword(req)
 
-    except Exception as e:
-        print(e, "EXC")
+    except:
         return getServerErrorResponse()
 
 
@@ -84,12 +81,13 @@ def resetPasswordRoute():
         return resetPassword(req)
 
     except (InvalidSignatureError, ExpiredSignatureError) as e:
-        return {"message": "Invalid or Expired Token"}, 400
+        return getInvalidTokenErrorResponse()
 
     except:
         return getServerErrorResponse()
 
 
+# Account Verificaiton Route
 @app.route("/auth/verify")
 def accountVerificationRoute():
     try:
@@ -101,9 +99,30 @@ def accountVerificationRoute():
         return verifyAccount(token)
 
     except (InvalidSignatureError, ExpiredSignatureError) as e:
-        return {"message": "Invalid or Expired Token"}, 400
+        return getInvalidTokenErrorResponse()
 
     except:
         return getServerErrorResponse()
 
 
+# Two factor authentication route
+@app.route("/auth/verify-otp")
+def twoFactorAuthRoute():
+    try:
+
+        req = request.get_json()
+
+        # Validate
+        condition, msg, status = validateTwoFactorAuthRoute(req)
+
+        # Validation check
+        if not condition:
+            return msg, status
+
+        return twoFactorAuth(req)
+
+    except (InvalidSignatureError, ExpiredSignatureError) as e:
+        return getInvalidTokenErrorResponse()
+
+    except:
+        return getServerErrorResponse()

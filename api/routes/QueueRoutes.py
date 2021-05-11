@@ -1,14 +1,17 @@
 from flask import request
 
 from api import *
-from api.misc.ServerError import getServerErrorResponse
+from api.decorators.AdminOnlyDecorator import adminOnly
+from api.decorators.TokenRequiredDecorator import tokenRequired
+from api.misc.ErrorResponse import getServerErrorResponse
 from api.services.QueueServices import getQueueDetails, updateQueueLength
 from api.validators.QueueValidator import validateUpdateQueueLengthRoute
 
 
 # Get queue length
 @app.route("/queue/getLength", methods=["GET"])
-def getQueueLengthRoute():
+@tokenRequired
+def getQueueLengthRoute(user):
     try:
         return getQueueDetails()
     except:
@@ -17,7 +20,8 @@ def getQueueLengthRoute():
 
 # Update Queue Length
 @app.route("/queue/updateLength", methods=["PUT"])
-def updateQueueLengthRoute():
+@adminOnly
+def updateQueueLengthRoute(user):
     try:
         req = request.get_json(force=True)
 

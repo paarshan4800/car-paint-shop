@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS
-from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 from oauthlib.oauth2 import WebApplicationClient
@@ -18,11 +17,10 @@ app = Flask(__name__)
 api = Api(app)
 CORS(app)
 
-mysql = MySQL(app)
-
 ACCESSTOKEN = "ACCESSTOKEN"
 RESETPASSWORDTOKEN = "RESETPASSWORDTOKEN"
 ACCOUNTVERIFICATIONTOKEN = "ACCOUNTVERIFICATIONTOKEN"
+TWOFACTORAUTHENTICATION = "TWOFACTORAUTHENTICATION"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS')

@@ -3,7 +3,7 @@ from flask import request
 from api import *
 from api.decorators.AdminOnlyDecorator import adminOnly
 
-from api.misc.ServerError import getServerErrorResponse
+from api.misc.ErrorResponse import getServerErrorResponse
 
 from api.services.PaintServices import requestPaint, getAllPaintJobs, closeSpecificPaintingArea, \
     getAllPaintJobRecords
@@ -12,10 +12,10 @@ from api.validators.PaintValidator import validateClosePaintAreaRoute, \
 from api.decorators.TokenRequiredDecorator import tokenRequired
 
 
-# Get All Paint Job Records - ADMIN
+# Get All Paint Job Records
 @app.route("/paint/getAllRecords", methods=["GET"])
 @adminOnly
-def getAllPaintJobRecordsRoute():
+def getAllPaintJobRecordsRoute(user):
     try:
         return getAllPaintJobRecords()
     except:
@@ -31,7 +31,7 @@ def getAvailablePaintJobsRoute():
         return getServerErrorResponse()
 
 
-# Request Paint Job - USER
+# Request Paint Job
 @app.route("/paint/request", methods=["POST"])
 @tokenRequired
 def requestPaintJobRoute(user):
@@ -47,16 +47,14 @@ def requestPaintJobRoute(user):
 
         return requestPaint(req, user)
 
-
-    except Exception as e:
-        print(e)
+    except:
         return getServerErrorResponse()
 
 
 # Close Specific Painting Area
 @app.route("/paint/closeArea", methods=["PATCH"])
 @adminOnly
-def closePaintAreaRoute():
+def closePaintAreaRoute(user):
     try:
         req = request.get_json(force=True)
 
@@ -69,6 +67,5 @@ def closePaintAreaRoute():
 
         return closeSpecificPaintingArea(req)
 
-    except Exception as e:
-        print(e)
+    except:
         return getServerErrorResponse()

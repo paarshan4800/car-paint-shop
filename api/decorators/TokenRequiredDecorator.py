@@ -4,7 +4,7 @@ import jwt
 from jwt import InvalidSignatureError, ExpiredSignatureError
 
 from api import app, ACCESSTOKEN
-from api.misc.ServerError import getServerErrorResponse
+from api.misc.ErrorResponse import getServerErrorResponse
 from api.services.AuthVerificationServices import isUserVerified
 from api.services.TokenServices import decodeToken
 from api.services.UserServices import getUser

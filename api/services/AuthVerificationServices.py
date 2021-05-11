@@ -6,6 +6,7 @@ from api.services.TokenServices import generateToken, decodeToken, getUser
 from api.models.UserModel import User
 
 
+# Check whether user is verified or not
 def isUserVerified(email):
     user = User.query.filter_by(email=email).first()
     if user.verified:
@@ -31,11 +32,11 @@ def sendAccountVerificationEmail(user, token):
 
         message.html = render_template("accountVerificationEmail.html", name=user.name, link=link)
 
-        print(message.body)
         mail.send(message)
 
 
 def accountVerificationEmail(user):
+    # Generate account verification token
     token = generateToken(user.email, ACCOUNTVERIFICATIONTOKEN)
     sendAccountVerificationEmail(user, token)
 

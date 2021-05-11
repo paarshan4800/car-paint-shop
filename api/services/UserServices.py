@@ -8,6 +8,7 @@ def getUser(email):
 
 def getAllUsers():
     users = User.query.all()
+    
     res = []
     for user in users:
         userData = {

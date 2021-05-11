@@ -8,6 +8,7 @@ from api.models.PaintJobModel import PaintJob
 
 def getAllPaintJobRecords():
     paintJobRecords = PaintJob.query.all()
+
     res = []
     for record in paintJobRecords:
         res.append({
@@ -16,8 +17,9 @@ def getAllPaintJobRecords():
             "paintedTime": record.painted_time,
             "user": record.user_email
         })
+
     return {
-               "message": "All paint job records",
+               "message": "All paint job records returned",
                "data": res
            }, 200
 
@@ -40,7 +42,7 @@ def paintCar(color, user, model):
     lock.acquire()  # Acquire the painting area
 
     print("--- Painting {} - {} at {} ---".format(queue.getFront().name, model, datetime.now().time()))
-    time.sleep(10)
+    time.sleep(30)
 
     # Add to DB
     paintJob = PaintJob(color=color, model=model, user=user)

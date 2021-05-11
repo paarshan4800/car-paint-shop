@@ -1,16 +1,17 @@
 from flask import render_template
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from api import mail, app, db, RESETPASSWORDTOKEN, ACCESSTOKEN
+from api import mail, app, db, RESETPASSWORDTOKEN, ACCESSTOKEN, TWOFACTORAUTHENTICATION
 from flask_mail import Message
 
 from api.services.AuthVerificationServices import accountVerificationEmail
-from api.services.TokenServices import generateToken, validateToken
+from api.services.TokenServices import generateToken, validateToken, generateOTP, decodeToken
 from api.services.UserServices import getUser
 from api.models.UserModel import User
 
 
 def userLogin(args):
+    # Find user with NORMAL registration type with given email
     user = User.query.filter_by(type="NORMAL").filter_by(email=args["email"]).first()
     if user is not None and check_password_hash(user.password, args["password"]):
         return True
@@ -18,6 +19,7 @@ def userLogin(args):
         return False
 
 
+# Check password and confirmation password
 def checkPasswordAndCPassword(password, c_password):
     if password != c_password:
         return False
@@ -25,6 +27,7 @@ def checkPasswordAndCPassword(password, c_password):
         return True
 
 
+# Send Reset Password Mail
 def sendResetPasswordMail(user, token):
     with app.app_context():
         message = Message(
@@ -39,8 +42,6 @@ def sendResetPasswordMail(user, token):
 
         message.html = render_template("resetPasswordRequest.html", name=user.name, token=token)
 
-        print(message.body)
-        print(message.html)
         mail.send(message)
 
 
@@ -54,8 +55,10 @@ def sendResetPassword(req):
     if not user or user.type != "NORMAL":
         return {"message": "Invalid Email"}, 400
 
+    # Generate Reset password token and send to mail
     token = generateToken(email, RESETPASSWORDTOKEN)
     sendResetPasswordMail(user, token)
+
     return {"message": "Password reset link sent to mail. Check."}, 200
 
 
@@ -116,6 +119,26 @@ def createUser(req):
                "message": "User Created Successfully. Verification mail sent. Please verify your account to access all the features"}, 201
 
 
+def twofactorauthenticationmail(user, token, otp):
+    with app.app_context():
+        digits = "0123456789"
+
+        message = Message(
+            "Two Factor Authentication",
+            sender=app.config['MAIL_DEFAULT_SENDER'],
+            recipients=[user.email]
+        )
+
+        message.body = """Hey {}. Your One Time Password (OTP) is {}. This will expire in the next 10 minutes. Use the below token and send it with the OTP.\nAuthentication Token - {}""".format(
+            user.name,
+            otp,
+            token)
+
+        message.html = render_template("twoFactorAuthenticationEmail.html", name=user.name, otp=otp, token=token)
+
+        mail.send(message)
+
+
 def login(req):
     email = req["email"]
     password = req["password"]
@@ -125,5 +148,28 @@ def login(req):
         return {"message": "Invalid Email/Password"}, 400
 
     # Generate access token
-    token = generateToken(email, ACCESSTOKEN)
+    otp = generateOTP()
+    token = generateToken(email, TWOFACTORAUTHENTICATION, otp, 10)
+    user = getUser(email)
+    twofactorauthenticationmail(user, token, otp)
+
+    return {"message": "OTP sent to mail. Enter your OTP to login."}, 200
+
+
+def twoFactorAuth(req):
+    # Validate token
+    token = req["token"]
+    condition, user = validateToken(token, TWOFACTORAUTHENTICATION)
+
+    if not condition:
+        return {"message": "Invalid authorization token"}, 401
+
+    otp = req["otp"]
+    data = decodeToken(token)
+
+    # Check if otp matches
+    if int(data["otp"]) != otp:
+        return {"message": "Invalid OTP"}, 401
+
+    token = generateToken(data["email"], ACCESSTOKEN)
     return {"message": "Logged in Successfully", "token": token}, 200

@@ -85,3 +85,14 @@ def validateResetPasswordRoute(req):
         return False, {"message": "Invalid Password (Minimum 8 characters)"}, 400
 
     return True, {}, 200
+
+
+def validateTwoFactorAuthRoute(req):
+    # Check for keys
+    if "token" not in req:
+        return False, {"message": "Token is required"}, 400
+
+    if "otp" not in req:
+        return False, {"message": "OTP is required"}, 400
+
+    return True, {}, 200

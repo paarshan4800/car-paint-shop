@@ -20,7 +20,7 @@ def googleLogin():
 
     requestURI = client.prepare_request_uri(
         authorizationEndpoint,
-        redirect_uri=app.config['APP_BASE_URL'] + "/callback",
+        redirect_uri=app.config['APP_BASE_URL'] + "/googleauth/callback",
         scope=["openid", "email", "profile"],
     )
 
@@ -53,8 +53,8 @@ def googleCallback():
     userInfoResponse = requests.get(uri, headers=headers, data=body)
 
     userInfo = userInfoResponse.json()
-    print(userInfo)
 
+    # Check whether user google account is verified or not. Extra check
     if not userInfo.get("email_verified"):
         return {"message": "User email not verified by Google"}, 400
 

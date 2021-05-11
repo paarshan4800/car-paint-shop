@@ -5,7 +5,7 @@ from flask import request
 from jwt import InvalidSignatureError, ExpiredSignatureError
 
 from api import ACCESSTOKEN
-from api.misc.ServerError import getServerErrorResponse
+from api.misc.ErrorResponse import getServerErrorResponse
 from api.services.TokenServices import decodeToken
 from api.services.UserServices import getUser
 
@@ -35,12 +35,13 @@ def adminOnly(f):
             if not user.admin:
                 return {"message": "Admin access required"}, 401
 
-            return f(*args, **kwargs)
+            return f(user,*args, **kwargs)
 
         except (InvalidSignatureError, ExpiredSignatureError) as e:
             return {"message": "Invalid or Expired Authorization Token"}, 400
 
-        except:
+        except Exception as e:
+            print(e)
             return getServerErrorResponse()
 
     return decorated
