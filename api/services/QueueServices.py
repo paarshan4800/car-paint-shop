@@ -1,3 +1,5 @@
+import logging
+
 from api import queue
 
 
@@ -12,5 +14,6 @@ def getQueueDetails():
 def updateQueueLength(req):
     maxCapacity = req["maxCapacity"]
     queue.setMaxCapacity(maxCapacity)
+    logging.info("Queue Capacity updated to {}".format(maxCapacity))
 
     return {"message": "Changed queue max capacity", "data": maxCapacity}, 200

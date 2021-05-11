@@ -14,7 +14,8 @@ from api.validators.QueueValidator import validateUpdateQueueLengthRoute
 def getQueueLengthRoute(user):
     try:
         return getQueueDetails()
-    except:
+    except Exception as e:
+        logging.error("Error in getting queue details - {}".format(e))
         return getServerErrorResponse()
 
 
@@ -34,5 +35,6 @@ def updateQueueLengthRoute(user):
 
         return updateQueueLength(req)
 
-    except:
+    except Exception as e:
+        logging.error("Error in updating queue details - {}".format(e))
         return getServerErrorResponse()

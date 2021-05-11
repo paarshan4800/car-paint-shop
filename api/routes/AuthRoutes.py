@@ -1,3 +1,5 @@
+import logging
+
 from jwt import InvalidSignatureError, ExpiredSignatureError
 from api import app
 from api.misc.ErrorResponse import getServerErrorResponse, getInvalidTokenErrorResponse
@@ -23,7 +25,8 @@ def registerRoute():
 
         return createUser(req)
 
-    except:
+    except Exception as e:
+        logging.error("Error registering new user - {}".format(e))
         return getServerErrorResponse()
 
 
@@ -42,7 +45,8 @@ def loginRoute():
 
         return login(req)
 
-    except:
+    except Exception as e:
+        logging.error("Error logging in user - {}".format(e))
         return getServerErrorResponse()
 
 
@@ -61,7 +65,8 @@ def resetPasswordRequestRoute():
 
         return sendResetPassword(req)
 
-    except:
+    except Exception as e:
+        logging.error("Error sending reset password mail- {}".format(e))
         return getServerErrorResponse()
 
 
@@ -83,7 +88,8 @@ def resetPasswordRoute():
     except (InvalidSignatureError, ExpiredSignatureError) as e:
         return getInvalidTokenErrorResponse()
 
-    except:
+    except Exception as e:
+        logging.error("Error resetting password- {}".format(e))
         return getServerErrorResponse()
 
 
@@ -101,7 +107,8 @@ def accountVerificationRoute():
     except (InvalidSignatureError, ExpiredSignatureError) as e:
         return getInvalidTokenErrorResponse()
 
-    except:
+    except Exception as e:
+        logging.error("Error verifying user account - {}".format(e))
         return getServerErrorResponse()
 
 
@@ -124,5 +131,6 @@ def twoFactorAuthRoute():
     except (InvalidSignatureError, ExpiredSignatureError) as e:
         return getInvalidTokenErrorResponse()
 
-    except:
+    except Exception as e:
+        logging.error("Error in two factor authorization - {}".format(e))
         return getServerErrorResponse()

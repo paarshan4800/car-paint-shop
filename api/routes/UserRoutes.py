@@ -1,3 +1,5 @@
+import logging
+
 from api import app
 from flask import request
 from api.decorators.AdminOnlyDecorator import adminOnly
@@ -14,7 +16,8 @@ def getUsers(user):
     try:
         return getAllUsers()
 
-    except:
+    except Exception as e:
+        logging.error("Error in getting all user details - {}".format(e))
         return getServerErrorResponse()
 
 
@@ -34,5 +37,6 @@ def deleteUserRoute(user):
 
         return deleteUser(req)
 
-    except:
+    except Exception as e:
+        logging.error("Error in deleting user - {}".format(e))
         return getServerErrorResponse()

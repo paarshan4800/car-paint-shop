@@ -1,3 +1,5 @@
+import logging
+
 from flask import render_template
 from flask_mail import Message
 
@@ -31,8 +33,9 @@ def sendAccountVerificationEmail(user, token):
         )
 
         message.html = render_template("accountVerificationEmail.html", name=user.name, link=link)
-
         mail.send(message)
+        logging.info("Sent account verification mail to - {}".format(user.email))
+
 
 
 def accountVerificationEmail(user):
@@ -56,5 +59,6 @@ def verifyAccount(token):
     # Update DB
     user.verified = True
     db.session.commit()
+    logging.info("User {} account verified".format(user.email))
 
     return {"message": "User account verified"}, 200

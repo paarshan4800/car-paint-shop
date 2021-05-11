@@ -1,3 +1,5 @@
+import logging
+
 from flask import render_template
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -43,6 +45,7 @@ def sendResetPasswordMail(user, token):
         message.html = render_template("resetPasswordRequest.html", name=user.name, token=token)
 
         mail.send(message)
+        logging.info("Reset Password Mail sent to {}".format(user.email))
 
 
 def sendResetPassword(req):
@@ -81,6 +84,7 @@ def resetPassword(req):
     hashedPassword = generate_password_hash(password)
     user.password = hashedPassword
     db.session.commit()
+    logging.info("Password resetted for - {}".format(user.email))
 
     return {"message": "Password reset successful"}, 200
 
@@ -112,6 +116,7 @@ def createUser(req):
     # Add to DB
     db.session.add(user)
     db.session.commit()
+    logging.info("Registered new user - {}".format(user.email))
 
     accountVerificationEmail(user)  # Send Verification Email
 
@@ -135,8 +140,8 @@ def twofactorauthenticationmail(user, token, otp):
             token)
 
         message.html = render_template("twoFactorAuthenticationEmail.html", name=user.name, otp=otp, token=token)
-
         mail.send(message)
+        logging.info("Sent two factor auth mail to - {}".format(user.email))
 
 
 def login(req):
@@ -172,4 +177,6 @@ def twoFactorAuth(req):
         return {"message": "Invalid OTP"}, 401
 
     token = generateToken(data["email"], ACCESSTOKEN)
+    logging.info("User {} logged in".format(user.email))
+
     return {"message": "Logged in Successfully", "token": token}, 200

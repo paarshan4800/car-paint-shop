@@ -44,10 +44,10 @@ db = SQLAlchemy(app)
 client = WebApplicationClient(app.config['GOOGLE_CLIENT_ID'])
 
 lock = threading.Lock()
-queue = Queue(2)
+queue = Queue(10)
 paintJobs = {
     "red": True,
-    "blue": True,
+    "blue": False,
     "yellow": True,
     "green": False,
 }

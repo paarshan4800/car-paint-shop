@@ -1,3 +1,5 @@
+import logging
+
 from api.models.UserModel import User
 from api import db
 
@@ -8,7 +10,7 @@ def getUser(email):
 
 def getAllUsers():
     users = User.query.all()
-    
+
     res = []
     for user in users:
         userData = {
@@ -36,5 +38,6 @@ def deleteUser(req):
     # Delete user from DB
     db.session.delete(user)
     db.session.commit()
+    logging.info("User {} deleted".format(email))
 
     return {"message": "User deleted successfully"}, 200

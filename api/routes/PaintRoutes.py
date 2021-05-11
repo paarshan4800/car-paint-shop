@@ -18,7 +18,8 @@ from api.decorators.TokenRequiredDecorator import tokenRequired
 def getAllPaintJobRecordsRoute(user):
     try:
         return getAllPaintJobRecords()
-    except:
+    except Exception as e:
+        logging.error("Error in getting all paint job records - {}".format(e))
         return getServerErrorResponse()
 
 
@@ -27,7 +28,8 @@ def getAllPaintJobRecordsRoute(user):
 def getAvailablePaintJobsRoute():
     try:
         return getAllPaintJobs()
-    except:
+    except Exception as e:
+        logging.error("Error in getting available paint job - {}".format(e))
         return getServerErrorResponse()
 
 
@@ -47,7 +49,8 @@ def requestPaintJobRoute(user):
 
         return requestPaint(req, user)
 
-    except:
+    except Exception as e:
+        logging.error("Error in painting car - {}".format(e))
         return getServerErrorResponse()
 
 
@@ -67,5 +70,6 @@ def closePaintAreaRoute(user):
 
         return closeSpecificPaintingArea(req)
 
-    except:
+    except Exception as e:
+        logging.error("Error in closing paint area - {}".format(e))
         return getServerErrorResponse()

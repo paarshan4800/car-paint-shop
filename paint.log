@@ -1,78 +1,13 @@
-2021-05-11 17:57:53,291 : INFO :  * Restarting with stat
-2021-05-11 17:57:54,628 : WARNING :  * Debugger is active!
-2021-05-11 17:57:54,645 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 17:57:54,651 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2021-05-11 17:58:37,745 : INFO :  * Restarting with stat
-2021-05-11 17:58:39,162 : WARNING :  * Debugger is active!
-2021-05-11 17:58:39,173 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 17:58:39,177 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2021-05-11 17:59:15,574 : INFO :  * Detected change in 'C:\\Users\\paarg\\Documents\\GitHub\\ctf-sd-recruitment-task\\api\\__init__.py', reloading
-2021-05-11 17:59:15,623 : INFO :  * Restarting with stat
-2021-05-11 17:59:17,109 : WARNING :  * Debugger is active!
-2021-05-11 17:59:17,122 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 17:59:17,131 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2021-05-11 18:00:20,726 : INFO :  * Detected change in 'C:\\Users\\paarg\\Documents\\GitHub\\ctf-sd-recruitment-task\\api\\validators\\UserValidator.py', reloading
-2021-05-11 18:00:20,778 : INFO :  * Restarting with stat
-2021-05-11 18:00:22,173 : WARNING :  * Debugger is active!
-2021-05-11 18:00:22,187 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 18:00:22,195 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2021-05-11 18:01:21,354 : INFO :  * Detected change in 'C:\\Users\\paarg\\Documents\\GitHub\\ctf-sd-recruitment-task\\api\\services\\AuthServices.py', reloading
-2021-05-11 18:01:21,416 : INFO :  * Restarting with stat
-2021-05-11 18:01:23,012 : WARNING :  * Debugger is active!
-2021-05-11 18:01:23,035 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 18:01:23,046 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2021-05-11 18:01:48,988 : INFO :  * Detected change in 'C:\\Users\\paarg\\Documents\\GitHub\\ctf-sd-recruitment-task\\api\\services\\AuthServices.py', reloading
-2021-05-11 18:01:49,086 : INFO :  * Restarting with stat
-2021-05-11 18:01:50,499 : WARNING :  * Debugger is active!
-2021-05-11 18:01:50,510 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 18:01:50,518 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2021-05-11 18:02:05,545 : INFO :  * Detected change in 'C:\\Users\\paarg\\Documents\\GitHub\\ctf-sd-recruitment-task\\api\\services\\AuthServices.py', reloading
-2021-05-11 18:02:05,672 : INFO :  * Restarting with stat
-2021-05-11 18:02:07,151 : WARNING :  * Debugger is active!
-2021-05-11 18:02:07,161 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 18:02:07,172 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2021-05-11 18:02:21,894 : INFO :  * Detected change in 'C:\\Users\\paarg\\Documents\\GitHub\\ctf-sd-recruitment-task\\api\\services\\AuthServices.py', reloading
-2021-05-11 18:02:22,001 : INFO :  * Restarting with stat
-2021-05-11 18:02:23,642 : WARNING :  * Debugger is active!
-2021-05-11 18:02:23,659 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 18:02:23,669 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2021-05-11 18:02:50,880 : INFO :  * Detected change in 'C:\\Users\\paarg\\Documents\\GitHub\\ctf-sd-recruitment-task\\api\\services\\AuthVerificationServices.py', reloading
-2021-05-11 18:02:51,100 : INFO :  * Restarting with stat
-2021-05-11 18:02:52,500 : WARNING :  * Debugger is active!
-2021-05-11 18:02:52,511 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 18:02:52,522 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2021-05-11 18:03:16,443 : INFO :  * Detected change in 'C:\\Users\\paarg\\Documents\\GitHub\\ctf-sd-recruitment-task\\api\\services\\AuthVerificationServices.py', reloading
-2021-05-11 18:03:16,518 : INFO :  * Restarting with stat
-2021-05-11 18:03:17,711 : WARNING :  * Debugger is active!
-2021-05-11 18:03:17,722 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 18:03:17,731 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2021-05-11 18:04:02,553 : INFO :  * Detected change in 'C:\\Users\\paarg\\Documents\\GitHub\\ctf-sd-recruitment-task\\api\\services\\GoogleAuthServices.py', reloading
-2021-05-11 18:04:02,612 : INFO :  * Restarting with stat
-2021-05-11 18:04:04,317 : WARNING :  * Debugger is active!
-2021-05-11 18:04:04,327 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 18:04:04,334 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2021-05-11 18:04:49,849 : INFO :  * Detected change in 'C:\\Users\\paarg\\Documents\\GitHub\\ctf-sd-recruitment-task\\api\\services\\GoogleAuthServices.py', reloading
-2021-05-11 18:04:49,958 : INFO :  * Restarting with stat
-2021-05-11 18:04:51,310 : WARNING :  * Debugger is active!
-2021-05-11 18:04:51,321 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 18:04:51,329 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2021-05-11 18:05:14,118 : INFO :  * Detected change in 'C:\\Users\\paarg\\Documents\\GitHub\\ctf-sd-recruitment-task\\api\\services\\PaintServices.py', reloading
-2021-05-11 18:05:14,169 : INFO :  * Restarting with stat
-2021-05-11 18:05:15,589 : WARNING :  * Debugger is active!
-2021-05-11 18:05:15,604 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 18:05:15,612 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2021-05-11 18:05:17,956 : INFO :  * Detected change in 'C:\\Users\\paarg\\Documents\\GitHub\\ctf-sd-recruitment-task\\api\\services\\PaintServices.py', reloading
-2021-05-11 18:05:18,016 : INFO :  * Restarting with stat
-2021-05-11 18:05:19,576 : WARNING :  * Debugger is active!
-2021-05-11 18:05:19,589 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 18:05:19,599 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2021-05-11 18:05:53,999 : INFO :  * Detected change in 'C:\\Users\\paarg\\Documents\\GitHub\\ctf-sd-recruitment-task\\api\\services\\PaintServices.py', reloading
-2021-05-11 18:05:54,045 : INFO :  * Restarting with stat
-2021-05-11 18:05:55,332 : WARNING :  * Debugger is active!
-2021-05-11 18:05:55,344 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 18:05:55,352 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2021-05-11 18:07:01,438 : INFO :  * Detected change in 'C:\\Users\\paarg\\Documents\\GitHub\\ctf-sd-recruitment-task\\api\\services\\UserServices.py', reloading
-2021-05-11 18:07:01,521 : INFO :  * Restarting with stat
-2021-05-11 18:07:03,047 : WARNING :  * Debugger is active!
-2021-05-11 18:07:03,060 : INFO :  * Debugger PIN: 343-142-518
-2021-05-11 18:07:03,070 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-05-11 18:14:32,535 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-05-11 18:14:44,287 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-05-11 18:15:02,134 : INFO : Reset Password Mail sent to paargav.shuttle@gmail.com
+2021-05-11 18:15:02,138 : INFO : 127.0.0.1 - - [11/May/2021 18:15:02] "[37mPOST /auth/resetPasswordRequest HTTP/1.1[0m" 200 -
+2021-05-11 18:17:47,295 : INFO : Reset Password Mail sent to paargav.shuttle@gmail.com
+2021-05-11 18:17:47,299 : INFO : 127.0.0.1 - - [11/May/2021 18:17:47] "[37mPOST /auth/resetPasswordRequest HTTP/1.1[0m" 200 -
+2021-05-11 18:18:04,330 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-05-11 18:18:10,286 : ERROR : Error sending reset password mail
+2021-05-11 18:18:10,290 : INFO : 127.0.0.1 - - [11/May/2021 18:18:10] "[35m[1mPOST /auth/resetPasswordRequest HTTP/1.1[0m" 500 -
+2021-05-11 18:20:36,871 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-05-11 18:20:44,782 : ERROR : Error registering new user division by zero
+2021-05-11 18:20:44,782 : INFO : 127.0.0.1 - - [11/May/2021 18:20:44] "[35m[1mPOST /auth/register HTTP/1.1[0m" 500 -
+2021-05-11 18:47:26,649 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)

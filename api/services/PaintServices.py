@@ -41,7 +41,7 @@ def getAllPaintJobs():
 def paintCar(color, user, model):
     lock.acquire()  # Acquire the painting area
 
-    print("--- Painting {} - {} at {} ---".format(queue.getFront().name, model, datetime.now().time()))
+    logging.info("Painting {} - {} at {}".format(queue.getFront().email, model, datetime.now().time()))
     time.sleep(30)
 
     # Add to DB
@@ -69,12 +69,12 @@ def requestPaint(req, user):
         return {"message": "Queue full. Please wait"}, 200
 
     queue.push(user)  # Add user to the queue
-    print("--- {} - {} added to the queue ---".format(user.name, model))
+    logging.info("{} - {} added to the queue".format(user.email, model))
 
     paintCar(color, user, model)  # Paint
 
     leftTheQueue = queue.pop()  # Remove user from the queue
-    print("--- Car {} - {} left the queue ---".format(leftTheQueue.name, model))
+    logging.info("Car {} - {} left the queue".format(leftTheQueue.email, model))
 
     return {"message": "Paint Work completed successfully"}, 200
 
@@ -95,5 +95,6 @@ def closeSpecificPaintingArea(req):
 
     # Change paint area status
     paintJobs[color] = status
+    logging.info("{} {} area".format(txt.capitalize(), color))
 
     return {"message": "{} {} area".format(txt.capitalize(), color)}, 200

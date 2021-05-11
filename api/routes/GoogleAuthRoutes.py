@@ -1,3 +1,5 @@
+import logging
+
 from api import app
 from flask import redirect
 
@@ -10,7 +12,8 @@ from api.services.GoogleAuthServices import googleLogin, googleCallback
 def googleLoginRoute():
     try:
         return redirect(googleLogin())
-    except:
+    except Exception as e:
+        logging.error("Error in google auth - {}".format(e))
         return getServerErrorResponse()
 
 
@@ -19,5 +22,6 @@ def googleLoginRoute():
 def googleCallbackRoute():
     try:
         return googleCallback()
-    except:
+    except Exception as e:
+        logging.error("Error in google auth callback - {}".format(e))
         return getServerErrorResponse()

@@ -1,4 +1,5 @@
 import json
+import logging
 
 import requests
 
@@ -70,7 +71,10 @@ def googleCallback():
         )
         db.session.add(user)
         db.session.commit()
+        logging.info("User {} registered through Google Auth".format(user.email))
 
     # Generate Token
     token = generateToken(user.email, ACCESSTOKEN)
+    logging.info("User {} logged in through Google Auth".format(user.email))
+
     return {"message": "Logged in Successfully", "token": token}, 200
