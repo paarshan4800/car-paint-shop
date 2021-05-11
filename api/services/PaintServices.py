@@ -42,7 +42,7 @@ def paintCar(color, user, model):
     lock.acquire()  # Acquire the painting area
 
     logging.info("Painting {} - {} at {}".format(queue.getFront().email, model, datetime.now().time()))
-    time.sleep(30)
+    time.sleep(20)
 
     # Add to DB
     paintJob = PaintJob(color=color, model=model, user=user)
