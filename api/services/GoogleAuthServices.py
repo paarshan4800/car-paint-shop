@@ -67,7 +67,8 @@ def googleCallback():
             name=userInfo.get("name"),
             admin=False,
             external_id=userInfo.get("sub"),
-            type="GOOGLE"
+            type="GOOGLE",
+            verified=True
         )
         db.session.add(user)
         db.session.commit()
