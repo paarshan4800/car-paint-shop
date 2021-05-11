@@ -14,3 +14,15 @@
 2021-05-11 19:07:04,838 : INFO : 127.0.0.1 - - [11/May/2021 19:07:04] "[37mGET /paint/getAvailable HTTP/1.1[0m" 200 -
 2021-05-11 21:55:01,691 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 2021-05-11 21:55:20,789 : INFO : 127.0.0.1 - - [11/May/2021 21:55:20] "[32mGET /api-docs HTTP/1.1[0m" 302 -
+2021-05-11 23:59:53,154 : INFO :  * Restarting with stat
+2021-05-11 23:59:53,980 : WARNING :  * Debugger is active!
+2021-05-11 23:59:53,989 : INFO :  * Debugger PIN: 343-142-518
+2021-05-11 23:59:54,001 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-05-11 23:59:57,243 : INFO : Registered new user - wites77488@labebx.com
+2021-05-12 00:00:01,540 : INFO : Sent account verification mail to - wites77488@labebx.com
+2021-05-12 00:00:01,543 : INFO : 127.0.0.1 - - [12/May/2021 00:00:01] "[37mPOST /auth/register HTTP/1.1[0m" 201 -
+2021-05-12 00:00:28,370 : INFO : User wites77488@labebx.com account verified
+2021-05-12 00:00:28,371 : INFO : 127.0.0.1 - - [12/May/2021 00:00:28] "[37mGET /auth/verify?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IndpdGVzNzc0ODhAbGFiZWJ4LmNvbSIsInR5cGUiOiJBQ0NPVU5UVkVSSUZJQ0FUSU9OVE9LRU4iLCJleHAiOjE2MjA3NTk1OTd9.Hc402E-EPAbUy0fTOn2O4iOBodGI8o8YdOVXGKHv-E4 HTTP/1.1[0m" 200 -
+2021-05-12 00:00:47,571 : INFO : Sent two factor auth mail to - wites77488@labebx.com
+2021-05-12 00:00:47,574 : INFO : 127.0.0.1 - - [12/May/2021 00:00:47] "[37mPOST /auth/login HTTP/1.1[0m" 200 -
+2021-05-12 00:01:09,743 : INFO : 127.0.0.1 - - [12/May/2021 00:01:09] "[37mPOST /auth/login HTTP/1.1[0m" 200 -
