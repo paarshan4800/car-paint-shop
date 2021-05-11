@@ -11,3 +11,6 @@
 2021-05-11 18:20:44,782 : ERROR : Error registering new user division by zero
 2021-05-11 18:20:44,782 : INFO : 127.0.0.1 - - [11/May/2021 18:20:44] "[35m[1mPOST /auth/register HTTP/1.1[0m" 500 -
 2021-05-11 18:47:26,649 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-05-11 19:07:04,838 : INFO : 127.0.0.1 - - [11/May/2021 19:07:04] "[37mGET /paint/getAvailable HTTP/1.1[0m" 200 -
+2021-05-11 21:55:01,691 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-05-11 21:55:20,789 : INFO : 127.0.0.1 - - [11/May/2021 21:55:20] "[32mGET /api-docs HTTP/1.1[0m" 302 -
