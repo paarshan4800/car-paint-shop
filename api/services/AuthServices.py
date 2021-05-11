@@ -153,9 +153,17 @@ def login(req):
         return {"message": "Invalid Email/Password"}, 400
 
     # Generate access token
+
+    user = getUser(email)
+
+    # If user is an admin, then no two factor auth
+    if user.admin:
+        token = generateToken(email, ACCESSTOKEN)
+        return {"message": "Logged in Successfully", "token": token}, 200
+
+    # Else generate OTP and sent 2 factor auth mail
     otp = generateOTP()
     token = generateToken(email, TWOFACTORAUTHENTICATION, otp, 10)
-    user = getUser(email)
     twofactorauthenticationmail(user, token, otp)
 
     return {"message": "OTP sent to mail. Enter your OTP to login."}, 200
