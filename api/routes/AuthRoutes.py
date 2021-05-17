@@ -113,7 +113,7 @@ def accountVerificationRoute():
 
 
 # Two factor authentication route
-@app.route("/auth/verify-otp", method=["POST"])
+@app.route("/auth/verify-otp", methods=["POST"])
 def twoFactorAuthRoute():
     try:
 
