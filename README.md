@@ -1,7 +1,5 @@
 # Car Paint Shop API
 
----
-
 - Shop has four painting areas (red, blue, yellow, green).
 - The whole shop has only a queue. Only a car in the front can get into the painting area.
 - It takes 20 seconds to paint a car. If a car is in a painting area, and the next car requested the same color and all
