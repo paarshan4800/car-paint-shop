@@ -115,10 +115,10 @@ def createUser(req):
 
     # Add to DB
     db.session.add(user)
-    db.session.commit()
     logging.info("Registered new user - {}".format(user.email))
 
     accountVerificationEmail(user)  # Send Verification Email
+    db.session.commit() # Commit after sending verification mail
 
     return {
                "message": "User Created Successfully. Verification mail sent. Please verify your account to access all the features"}, 201

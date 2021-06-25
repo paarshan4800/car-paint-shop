@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 from oauthlib.oauth2 import WebApplicationClient
 
+import dotenv
 import logging
 import threading
 
@@ -17,6 +18,8 @@ app = Flask(__name__)
 api = Api(app)
 CORS(app)
 
+dotenv.load_dotenv()
+
 ACCESSTOKEN = "ACCESSTOKEN"
 RESETPASSWORDTOKEN = "RESETPASSWORDTOKEN"
 ACCOUNTVERIFICATIONTOKEN = "ACCOUNTVERIFICATIONTOKEN"
@@ -25,7 +28,6 @@ TWOFACTORAUTHENTICATION = "TWOFACTORAUTHENTICATION"
 APIDOCS_URL = "https://documenter.getpostman.com/view/11508905/TzRU9mNK"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS')
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['BUNDLE_ERRORS'] = os.getenv('BUNDLE_ERRORS')
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
