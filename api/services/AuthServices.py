@@ -113,12 +113,12 @@ def createUser(req):
         verified=False
     )
 
+    accountVerificationEmail(user)  # Send Verification Email
+    
     # Add to DB
     db.session.add(user)
-    logging.info("Registered new user - {}".format(user.email))
-
-    accountVerificationEmail(user)  # Send Verification Email
     db.session.commit() # Commit after sending verification mail
+    logging.info("Registered new user - {}".format(user.email))
 
     return {
                "message": "User Created Successfully. Verification mail sent. Please verify your account to access all the features"}, 201
